@@ -83,11 +83,11 @@ export default function ProfileSetup() {
             />
           </div>
           <h1 className="text-4xl font-bold text-fg mb-6">
-            complete
+            Complete
             <br /> your profile
           </h1>
           <p className="text-lg text-sec font-medium">
-            tell us more about yourself
+            Tell us more about yourself
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export default function ProfileSetup() {
                 htmlFor="name"
                 className="text-sm font-semibold text-fg mb-2 block"
               >
-                full name
+                Full name
               </label>
               <input
                 id="name"
@@ -116,7 +116,7 @@ export default function ProfileSetup() {
                 htmlFor="major"
                 className="text-sm font-semibold text-fg mb-2 block"
               >
-                major
+                Major
               </label>
               <input
                 id="major"
@@ -134,7 +134,7 @@ export default function ProfileSetup() {
                 htmlFor="hobbies"
                 className="text-sm font-semibold text-fg mb-2 block"
               >
-                hobbies
+                Hobbies
               </label>
               <input
                 id="hobbies"
@@ -143,10 +143,10 @@ export default function ProfileSetup() {
                 value={hobbies}
                 onChange={(e) => setHobbies(e.target.value)}
                 className="w-full px-4 py-3 border border-border-gray focus:outline-none focus:border-accent text-fg font-medium transition-all"
-                placeholder="reading, sleeping, sports"
+                placeholder="Reading, Sleeping, Sports"
               />
               <p className="text-xs text-sec mt-2 font-medium">
-                separate multiple hobbies with commas
+                Separate multiple hobbies with commas
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export default function ProfileSetup() {
               disabled={ld}
               className="w-full py-4 bg-pri text-white font-bold text-lg hover:bg-deep-purple transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {ld ? "saving..." : "continue"}
+              {ld ? "Saving..." : "Continue"}
             </button>
           </form>
         </div>

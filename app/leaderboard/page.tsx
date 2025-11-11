@@ -97,13 +97,32 @@ export default function Leaderboard() {
     return "bg-pri text-white text-lg";
   };
 
+  // Get top 5 users and current user if not in top 5
+  const getDisplayEntries = () => {
+    if (lb.length === 0) return [];
+
+    const top5 = lb.slice(0, 5);
+    const currentUserEntry = lb.find((entry) => isUser(entry.userId));
+
+    // If user is not in top 5 and exists, add them to the display
+    if (currentUserEntry && currentUserEntry.rank > 5) {
+      return [...top5, currentUserEntry];
+    }
+
+    return top5;
+  };
+
+  const displayEntries = getDisplayEntries();
+  const currentUserEntry = lb.find((entry) => isUser(entry.userId));
+  const showSeparator = currentUserEntry && currentUserEntry.rank > 5;
+
   return (
     <div className="min-h-screen bg-cream">
       <Navbar />
       <main className="max-w-2xl mx-auto space-y-6 p-4 pt-6">
         <header className="text-center">
           <h1 className="text-4xl font-bold text-fg mb-2">Leaderboard</h1>
-          <p className="text-sec font-medium">Gotta catch them all!</p>
+          <p className="text-sec font-medium">Only top 5 and your rank is shown:</p>
         </header>
 
         <section className="space-y-4">
@@ -113,8 +132,19 @@ export default function Leaderboard() {
             </div>
           ) : (
             <>
-              {lb.map((entry) => (
-                <article
+              {displayEntries.map((entry, index) => (
+                <div key={entry.userId}>
+                  {/* Show separator before user's entry if they're not in top 5 */}
+                  {showSeparator && index === 5 && (
+                    <div className="flex items-center gap-3 my-6">
+                      <div className="flex-1 border-t-2 border-dashed border-sec"></div>
+                      <span className="text-sec text-sm font-medium px-3">
+                        YOUR RANK
+                      </span>
+                      <div className="flex-1 border-t-2 border-dashed border-sec"></div>
+                    </div>
+                  )}
+                  <article
                   key={entry.userId}
                   className={`
                     bg-white shadow-md border-2 p-5 transition-all hover:shadow-lg
@@ -173,6 +203,7 @@ export default function Leaderboard() {
                     </div>
                   </div>
                 </article>
+                </div>
               ))}
             </>
           )}
