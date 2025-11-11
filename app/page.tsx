@@ -1,65 +1,161 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import { useAuth } from "@/contexts/AuthContext";
+
 export default function Home() {
+  const { user, signIn, signUp, loading: authLoading } = useAuth();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [mode, setMode] = useState(false);
+  const [msg, setMsg] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authLoading || !user) return;
+
+    if (!user.hasCompletedProfile) {
+      router.push("/profile-setup");
+      return;
+    }
+    router.push("/main");
+  }, [user, authLoading, router]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMsg("");
+
+    if (process.env.NODE_ENV !== "production") {
+      console.debug("[auth] submitting", {
+        mode: mode ? "signup" : "signin",
+        email,
+      });
+    }
+
+    try {
+      if (mode) await signUp(email, password);
+      else await signIn(email, password);
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Authentication failed";
+      setMsg(errorMessage);
+    }
+  };
+
+  if (authLoading)
+    return (
+      <div className="min-h-screen flex bg-cream items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin h-12 w-12 border-4 border-pri border-t-transparent mb-4"></div>
+          <p className="text-fg text-lg font-medium">loading...</p>
+        </div>
+      </div>
+    );
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen flex flex-col justify-center items-center bg-cream px-4">
+      <div className="my-8 text-center">
+        <div className="flex items-center justify-center w-20 h-20 flex shadow-lg mx-auto mb-4">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={80}
+            height={80}
+            className="w-full h-full shadow-sm transition-shadow object-contain"
+          />
+        </div>
+        <h1 className="mb-3 font-black text-5xl text-fg">fren</h1>
+        <p className="text-medium-blue text-lg font-semibold">
+          diversity in varsity
+        </p>
+      </div>
+      <div className="m-4 border border-border-gray bg-off-white p-8 shadow-lg max-w-md w-full">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-fg">
+            {mode ? "sign up" : "sign in"}
+          </h2>
+          <p className="text-sec font-medium mt-2">
+            {mode ? "to start meeting others" : "to continue making friends"}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          <div>
+            <label
+              className="text-sm font-semibold text-fg mb-2 block"
+              htmlFor="email"
+            >
+              email address
+            </label>
+            <input
+              className="w-full border border-border-gray px-4 text-fg py-3 focus:border-accent-blue focus:outline-none font-medium"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="nushhack25@example.com"
+              autoComplete="email"
+              inputMode="email"
+              value={email}
+              type="email"
+              id="email"
+              required
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="text-sm font-semibold text-fg mb-2 block"
+            >
+              password
+            </label>
+            <input
+              className="w-full px-4 py-3 border border-border-gray text-fg focus:outline-none focus:border-accent-blue font-medium"
+              autoComplete={mode ? "new-password" : "current-password"}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="min. 6 characters"
+              value={password}
+              type="password"
+              id="password"
+              minLength={6}
+              required
+            />
+          </div>
+
+          {msg && (
+            <div
+              className="text-sm bg-light-pink p-4 text-retro-pink text-center font-semibold border border-retro-pink"
+              aria-live="polite"
+              role="alert"
+            >
+              {msg}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="w-full bg-retro-pink py-4 font-bold text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 text-lg cursor-pointer"
           >
-            Documentation
-          </a>
+            {mode ? "create account" : "sign in"}
+          </button>
+        </form>
+
+        <div className="mt-8 text-center">
+          <button
+            type="button"
+            onClick={() => {
+              setMode((v) => !v);
+              setMsg("");
+            }}
+            className="text-sm font-semibold text-sec hover:text-accent-blue transition-colors px-4 py-2"
+          >
+            {mode
+              ? "already have an account? sign in"
+              : "new here? create an account"}
+          </button>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

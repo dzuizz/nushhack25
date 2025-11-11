@@ -1,3 +1,6 @@
+> [!Warning]
+> To whoever is reading the code, don't judge my coding style plss 👉👈😈 (for some pages only dw)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
