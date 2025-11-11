@@ -146,7 +146,7 @@ export default function Main() {
       setShowScanner(false);
       router.push("/conversation");
     } else {
-      alert("oops! wrong person.");
+      alert("Oops! Wrong person.");
       setShowScanner(false);
     }
   };
@@ -157,7 +157,7 @@ export default function Main() {
         <div className="text-center">
           <div className="inline-block animate-spin h-12 w-12 border-4 border-pri border-t-transparent mb-4"></div>
           <p className="text-fg text-lg font-medium">
-            finding your next friend...
+            Finding your next friend...
           </p>
         </div>
       </div>
@@ -170,7 +170,7 @@ export default function Main() {
       <div className="mx-auto max-w-2xl space-y-6 p-4 pt-6">
         <div className="bg-white p-6 border border-border-gray shadow-md">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-fg">your profile</h2>
+            <h2 className="text-2xl font-bold text-fg">Your profile</h2>
             <div className="bg-pri text-white px-4 py-2 font-bold">
               {user?.score} pts
             </div>
@@ -206,12 +206,12 @@ export default function Main() {
               onClick={() => setShowQR((v) => !v)}
               className="w-full py-3 bg-pri text-white font-semibold hover:bg-deep-purple transition-all"
             >
-              {showQR ? "hide my QR code" : "show my QR code"}
+              {showQR ? "Hide my QR code" : "Show my QR code"}
             </button>
             {showQR && (
               <div className="mt-6 p-6 bg-cream flex flex-col items-center border border-border-gray">
                 <p className="text-sm text-fg font-medium mb-3">
-                  let your match scan this
+                  Let your match scan this
                 </p>
                 <div className="bg-white p-4 border border-border-gray">
                   <QRCode value={user?.uid || ""} size={200} />
@@ -224,13 +224,13 @@ export default function Main() {
         {tgt ? (
           <div className="bg-white p-6 border border-border-gray shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-fg">target person</h2>
+              <h2 className="text-2xl font-bold text-fg">Target person</h2>
               <button
                 onClick={handleRefresh}
                 disabled={refreshing}
                 className="px-4 py-2 text-sm bg-accent text-white hover:bg-pri transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {refreshing ? "finding..." : "find new match"}
+                {refreshing ? "Finding..." : "Find new match"}
               </button>
             </div>
             <div className="space-y-3 text-fg mb-6">
@@ -263,10 +263,10 @@ export default function Main() {
               onClick={() => setShowScanner(true)}
               className="w-full py-4 bg-accent text-white font-bold text-lg hover:bg-pri transition-all"
             >
-              scan their QR code
+              Scan their QR code
             </button>
             <p className="text-center text-sm text-sec mt-3 font-medium">
-              find them and start a conversation
+              Find them and start a conversation
             </p>
           </div>
         ) : (

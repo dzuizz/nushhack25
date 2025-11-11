@@ -63,7 +63,7 @@ export default function ProfileSetup() {
       <div className="min-h-screen flex items-center justify-center bg-cream">
         <div className="text-center">
           <div className="inline-block animate-spin h-12 w-12 border-4 border-pri border-t-transparent mb-4"></div>
-          <p className="text-fg text-lg font-medium">loading...</p>
+          <p className="text-fg text-lg font-medium">Loading...</p>
         </div>
       </div>
     );

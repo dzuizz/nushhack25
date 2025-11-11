@@ -57,9 +57,9 @@ export default function QRScanner({
       <div className="bg-white p-8 max-w-md w-full shadow-lg border border-border-gray">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-fg">qr code scanning</h2>
+            <h2 className="text-2xl font-bold text-fg">QR code scanning</h2>
             <p className="text-sm text-sec font-medium">
-              point it at a qr code to scan
+              Point it at a QR code to scan
             </p>
           </div>
           <button
@@ -73,7 +73,7 @@ export default function QRScanner({
         {ld && (
           <div className="flex flex-col items-center justify-center py-12">
             <div className="inline-block animate-spin h-16 w-16 border-4 border-pri border-t-transparent mb-4"></div>
-            <p className="text-fg font-medium">starting cam...</p>
+            <p className="text-fg font-medium">Starting cam...</p>
           </div>
         )}
 
@@ -94,14 +94,14 @@ export default function QRScanner({
             </div>
             <div className="flex items-center justify-center gap-2 text-xs text-sec">
               <div className="w-2 h-2 bg-accent animate-pulse"></div>
-              <span className="font-medium">scanning...</span>
+              <span className="font-medium">Scanning...</span>
             </div>
           </div>
         )}
 
         {ok && (
           <div className="mt-6 bg-pri p-4 text-center">
-            <p className="text-white font-bold">qr code detected...</p>
+            <p className="text-white font-bold">QR code detected...</p>
           </div>
         )}
       </div>

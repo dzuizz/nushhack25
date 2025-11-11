@@ -50,7 +50,7 @@ export default function Home() {
       <div className="min-h-screen flex bg-cream items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin h-12 w-12 border-4 border-pri border-t-transparent mb-4"></div>
-          <p className="text-fg text-lg font-medium">loading...</p>
+          <p className="text-fg text-lg font-medium">Loading...</p>
         </div>
       </div>
     );
@@ -67,7 +67,7 @@ export default function Home() {
             className="w-full h-full shadow-sm transition-shadow object-contain"
           />
         </div>
-        <h1 className="mb-3 font-black text-5xl text-fg">fren</h1>
+        <h1 className="mb-3 font-black text-5xl text-fg">Fren</h1>
         <p className="text-medium-blue text-lg font-semibold">
           diversity in varsity
         </p>
@@ -75,7 +75,7 @@ export default function Home() {
       <div className="m-4 border border-border-gray bg-off-white p-8 shadow-lg max-w-md w-full">
         <div className="mb-8 text-center">
           <h2 className="text-3xl font-bold text-fg">
-            {mode ? "sign up" : "sign in"}
+            {mode ? "Sign up" : "Sign in"}
           </h2>
           <p className="text-sec font-medium mt-2">
             {mode ? "to start meeting others" : "to continue making friends"}
@@ -88,7 +88,7 @@ export default function Home() {
               className="text-sm font-semibold text-fg mb-2 block"
               htmlFor="email"
             >
-              email address
+              Email address
             </label>
             <input
               className="w-full border border-border-gray px-4 text-fg py-3 focus:border-accent-blue focus:outline-none font-medium"
@@ -108,13 +108,13 @@ export default function Home() {
               htmlFor="password"
               className="text-sm font-semibold text-fg mb-2 block"
             >
-              password
+              Password
             </label>
             <input
               className="w-full px-4 py-3 border border-border-gray text-fg focus:outline-none focus:border-accent-blue font-medium"
               autoComplete={mode ? "new-password" : "current-password"}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="min. 6 characters"
+              placeholder="Min. 6 characters"
               value={password}
               type="password"
               id="password"
@@ -137,11 +137,11 @@ export default function Home() {
             type="submit"
             className="w-full bg-retro-pink py-4 font-bold text-white transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 text-lg cursor-pointer"
           >
-            {mode ? "create account" : "sign in"}
+            {mode ? "Create account" : "Sign in"}
           </button>
         </form>
 
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <button
             type="button"
             onClick={() => {
@@ -151,8 +151,8 @@ export default function Home() {
             className="text-sm font-semibold text-sec hover:text-accent-blue transition-colors px-4 py-2"
           >
             {mode
-              ? "already have an account? sign in"
-              : "new here? create an account"}
+              ? "Already have an account? Sign in"
+              : "New here? Create an account"}
           </button>
         </div>
       </div>

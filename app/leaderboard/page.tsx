@@ -102,8 +102,8 @@ export default function Leaderboard() {
       <Navbar />
       <main className="max-w-2xl mx-auto space-y-6 p-4 pt-6">
         <header className="text-center">
-          <h1 className="text-4xl font-bold text-fg mb-2">leaderboard</h1>
-          <p className="text-sec font-medium">gotta catch them all!</p>
+          <h1 className="text-4xl font-bold text-fg mb-2">Leaderboard</h1>
+          <p className="text-sec font-medium">Gotta catch them all!</p>
         </header>
 
         <section className="space-y-4">
@@ -180,7 +180,7 @@ export default function Leaderboard() {
 
         <section className="bg-white p-6 shadow-md border border-border-gray">
           <h2 className="text-xl font-bold text-fg mb-4">
-            how to earn points?
+            How to earn points?
           </h2>
           <ul className="space-y-3 text-fg" role="list">
             <li className="p-3 bg-cream border-l-4 border-pri">

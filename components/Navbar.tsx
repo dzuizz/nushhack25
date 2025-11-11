@@ -48,7 +48,7 @@ export default function Navbar() {
                     : "text-fg hover:bg-cream"
                 }`}
               >
-                home
+                Home
               </Link>
               <Link
                 href="/leaderboard"
@@ -60,13 +60,13 @@ export default function Navbar() {
                     : "text-fg hover:bg-cream",
                 ].join(" ")}
               >
-                leaderboard
+                Leaderboard
               </Link>
               <button
                 onClick={yeet}
                 className="ml-1 sm:ml-2 px-4 py-2 text-sm font-medium bg-cream text-fg border border-border-gray hover:bg-gray-100 transition"
               >
-                logout
+                Logout
               </button>
             </div>
           )}
