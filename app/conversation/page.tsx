@@ -29,12 +29,11 @@ export default function ConversationPage() {
 
   useEffect(() => {
     if (convo && !disc) {
-      return () =>
-        clearInterval(
-          setInterval(() => {
-            setET(Math.floor((Date.now() - convo.startedAt) / 1000));
-          }, 1000)
-        );
+      const intervalId = setInterval(() => {
+        setET(Math.floor((Date.now() - convo.startedAt) / 1000));
+      }, 1000);
+
+      return () => clearInterval(intervalId);
     }
   }, [convo, disc]);
 
@@ -104,7 +103,7 @@ export default function ConversationPage() {
     setEnd(false);
 
     const duration = Math.floor((Date.now() - convo.startedAt) / 1000);
-    const pointsEarned = Math.floor(duration / 60) * 10;
+    const pointsEarned = Math.floor(duration);
 
     const convoRef = ref(database, `conversations/${convo.id}`);
     await set(convoRef, {
@@ -168,7 +167,7 @@ export default function ConversationPage() {
       <div className="min-h-screen flex items-center justify-center bg-cream">
         <div className="text-center">
           <div className="inline-block animate-spin h-12 w-12 border-4 border-pri border-t-transparent mb-4"></div>
-          <p className="text-fg text-lg font-medium">Loading convo...</p>
+          <p className="text-fg text-lg font-medium">Loading conversation...</p>
         </div>
       </div>
     );
@@ -228,7 +227,7 @@ export default function ConversationPage() {
           </div>
           <div className="inline-flex items-center gap-2 bg-cream px-6 py-3">
             <p className="text-sm text-fg font-bold">
-              Earning 10 points per minute
+              Earning a point per second
             </p>
           </div>
         </div>
@@ -268,12 +267,12 @@ export default function ConversationPage() {
             onClick={confirmStopConvo}
             className="w-full py-4 bg-pri text-white font-bold text-lg"
           >
-            End Conversation
+            End conversation
           </button>
 
           <button
             onClick={() => setRep(true)}
-            className="w-full py-3 bg-red-50 text-error font-semibold border border-error"
+            className="w-full py-3 bg-white text-error font-bold border-2 border-error"
           >
             Report Issue
           </button>
@@ -294,8 +293,8 @@ export default function ConversationPage() {
             </div>
 
             <p className="text-sm text-sec mb-6 bg-cream p-4 border-l-4 border-pri">
-              Please describe what happened. Your rep will be reviewed by our
-              team and kept confidential.
+              Please describe what happened. Your report will be reviewed by your
+              school board and kept confidential.
             </p>
 
             <textarea
@@ -308,7 +307,7 @@ export default function ConversationPage() {
             <button
               onClick={handleReport}
               disabled={!cause.trim()}
-              className="w-full mt-6 py-4 bg-error text-white font-bold opacity-100 cursor-allowed disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-6 py-4 bg-error text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Submit Report
             </button>
@@ -321,7 +320,7 @@ export default function ConversationPage() {
           <div className="bg-white p-8 max-w-md w-full shadow-lg border border-border-gray transform">
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-fg mb-2">
-                End Conversation?
+                End conversation?
               </h2>
               <p className="text-sec font-medium">
                 You've been chatting for {formatTime(et)}
@@ -330,7 +329,7 @@ export default function ConversationPage() {
 
             <div className="bg-cream p-6 mb-6 border-l-4 border-pri">
               <p className="text-lg font-bold text-fg mb-2">
-                Points to earn: {Math.floor(et / 60) * 10}
+                Points to earn: {Math.floor(et)}
               </p>
               <p className="text-sm text-sec">
                 Both of you will receive these points.
@@ -348,7 +347,7 @@ export default function ConversationPage() {
                 onClick={() => setEnd(false)}
                 className="w-full py-3 bg-cream text-fg font-semibold border border-border-gray"
               >
-                Continue Chatting
+                Continue chatting
               </button>
             </div>
           </div>
